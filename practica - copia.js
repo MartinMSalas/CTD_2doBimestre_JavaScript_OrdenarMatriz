@@ -1,5 +1,4 @@
 
-
 const arrayCuentas =
     [
         {
@@ -126,117 +125,105 @@ const matrizCuentas =
             {
                 titular: "Harding Mitchell2",
                 estaHabilitada: true,
-                saldo: 108.68,
+                saldo: 10008.68,
                 edadTitular: 25,
                 tipoCuenta: "corriente"
             }
         ]]
         
 const ordenarMatriz = (array) => {
-    
+
     let auxiliar = {};
-    let cantidadElementos=0;
-    let cantELementosXFila =[];
-    let cantELementosAcumuladosXFila =[];
-    // Necesito saber cuantos elementos tengos 
+
     for (let l = 0; l < array.length; l++) {
-        cantELementosXFila.push(array[l].length);
-        for (let m = 0; m < array[l].length; m++) {            
-            cantidadElementos++;                        
-        }
-        cantELementosAcumuladosXFila.push(cantidadElementos);       
-    }
-    console.log(`Tengo ${cantidadElementos} elementos en la matriz`);
-    console.log(`Tengo ${cantELementosAcumuladosXFila} elementos acumulados por fila`);
+        for (let m = 0; m < array[l].length; m++) {
 
-    for (let k = 0; k< cantidadElementos ;k++){
 
-        for (let i = 0; i < array.length; i++) {
-            for (let j = 0; j < array[i].length; j++) {
-                    
-                console.log(`El saldo en este punto es ${array[i][j].saldo}`)
-                if (j+1 < Object.keys(array[i]).length){            //uso object.keys porque no entraba con array[i].length
-                    console.log(` y el saldo siguiente ${array[i][j+1].saldo}`)
-                    
-                    if (array[i][j].saldo > array[i][j+1].saldo){
-                        console.log(`intercambio intercolumna `)
-                        auxiliar = array[i][j];
-                        array[i][j] = array[i][j+1];
-                        array[i][j+1] = auxiliar;
-                        // [array[i][j],array[i][j+1]] =[array[i][j+1],array[i][j]];
-                        // posFilasColumn = [i,j];
-                        
+            for (let i = 0; i < array.length - l; i++) {
+                
+                for (let j = 0; j < array[i].length; j++) {
+
+                    if (j+1 < array[i].length){
+                    // if (j+1 < Object.keys(array[i]).length){            //uso object.keys porque no entraba con array[i].length
+                        if (array[i][j].saldo > array[i][j+1].saldo){
+                            [array[i][j],array[i][j+1]] =[array[i][j+1],array[i][j]];
+                            // auxiliar = array[i][j];
+                            // array[i][j] = array[i][j+1];
+                            // array[i][j+1] = auxiliar;                        
+                        }            
                     }
-            
-                }
-                else if (j+1 == Object.keys(array[i]).length){
-                    if (i+1< Object.keys(array).length){
-                        // console.log(` y el saldo siguiente ${array[i+1][0]}`)
-                        if (array[i][j].saldo > array[i+1][0].saldo){
-                            // console.log(`Intercambio Interfilas`)
-                            auxiliar =  array[i][j];
-                            array[i][j] = array[i+1][0];
-                            array[i+1][0] = auxiliar;
+                    else if (j+1 == array[i].length){
+                    // else if (j+1 == Object.keys(array[i]).length){
+                        if (i+1< array.length){
+                        // if (i+1< Object.keys(array).length){
+                            // console.log(` y el saldo siguiente ${array[i+1][0]}`)
+                            if (array[i][j].saldo > array[i+1][0].saldo){
+                                // console.log(`Intercambio Interfilas`)
+                                [array[i][j],array[i+1][0]] =[array[i+1][0],array[i][j]];
+                                // auxiliar =  array[i][j];
+                                // array[i][j] = array[i+1][0];
+                                // array[i+1][0] = auxiliar;
+                            }
                         }
                     }
                 }
             }
-        }
+        }        
     }
-    console.log(cantELementosXFila);
+
     return array;
 }
 
 console.log("-------------------------------------------------------------------------------");
 console.log(ordenarMatriz(matrizCuentas));
+// console.table(ordenarMatriz(matrizCuentas));
 
+// const numerosEnteros = [
+// [1,2,3,4,5],
+// [6,7,8,9,10],
+// [11,12,13,14,15],
+// [16,17,100,19,20],
+// [21,22,23,24,25]
+// ];
 
-const numerosEnteros = [
-[1,2,3,4,5],
-[6,7,8,9,10],
-[11,12,13,14,15],
-[16,17,100,19,20],
-[21,22,23,24,25]
-];
+// const mayorMatriz = (array) => {
+//     let auxiliar = 0;
+//     for (let i= 0; i<array.length -1; i++) {
+//         for (let j= 0; j<array.length -1; j++)
+//         {
+//             if (array[i][j] > auxiliar){
+//                 auxiliar = array[i][j];
+//             }
+//         }
+// }
+// return auxiliar;
+// };
 
-const mayorMatriz = (array) => {
-    let auxiliar = 0;
-    for (let i= 0; i<array.length -1; i++) {
-        for (let j= 0; j<array.length -1; j++)
-        {
-            if (array[i][j] > auxiliar){
-                auxiliar = array[i][j];
-            }
-        }
-}
-return auxiliar;
-};
+// // console.log(mayorMatriz(numerosEnteros));
 
-// console.log(mayorMatriz(numerosEnteros));
+// function ordenarFila(arrayOrden){
+//     for(let i=0; i<arrayOrden.length -1; i++){
+//         for (let j=0; j<arrayOrden.length -1 -i; j++){
+//             if (arrayOrden[j] > arrayOrden[j + 1]){
 
-function ordenarFila(arrayOrden){
-    for(let i=0; i<arrayOrden.length -1; i++){
-        for (let j=0; j<arrayOrden.length -1 -i; j++){
-            if (arrayOrden[j] > arrayOrden[j + 1]){
+//                 [arrayOrden[j],arrayOrden[j+1]] =[arrayOrden[j+1],arrayOrden[j]]
 
-                [arrayOrden[j],arrayOrden[j+1]] =[arrayOrden[j+1],arrayOrden[j]]
+//             }
+//         }
+//     }
+//     return arrayOrden;
+// };
 
-            }
-        }
-    }
-    return arrayOrden;
-};
+// // console.log(ordenarFila(numerosEnteros[3]));
 
-// console.log(ordenarFila(numerosEnteros[3]));
+// function mayorSaldo (array3){
+//     let auxiliar2 = array3[0];
+//     for (let i = 0; i<array3.length -1; i++){
+//         if(array3[i].saldo > auxiliar2.saldo){
+//             auxiliar2 = array3[i];
+//         }
+//     }
+// return auxiliar2;
+// };
 
-function mayorSaldo (array3){
-    let auxiliar2 = array3[0];
-    for (let i = 0; i<array3.length -1; i++){
-        if(array3[i].saldo > auxiliar2.saldo){
-            auxiliar2 = array3[i];
-        }
-    }
-return auxiliar2;
-};
-
-// console.log(mayorSaldo(arrayCuentas));
+// // console.log(mayorSaldo(arrayCuentas));
